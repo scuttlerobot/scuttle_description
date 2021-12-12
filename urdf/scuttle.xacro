@@ -36,7 +36,7 @@
     <geometry>
       <mesh filename="package://scuttle_description/meshes/l_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="blue"/>
   </visual>
   <collision>
     <origin rpy="0 0 0" xyz="-0.21235 -0.0 -0.04175"/>
@@ -57,7 +57,7 @@
     <geometry>
       <mesh filename="package://scuttle_description/meshes/r_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="blue"/>
   </visual>
   <collision>
     <origin rpy="0 0 0" xyz="0.21215 0.0 -0.04175"/>
@@ -141,7 +141,7 @@
     <geometry>
       <mesh filename="package://scuttle_description/meshes/l_caster_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="blue"/>
   </visual>
   <collision>
     <origin rpy="0 0 0" xyz="-0.101223 0.230415 -0.025282"/>
@@ -162,7 +162,7 @@
     <geometry>
       <mesh filename="package://scuttle_description/meshes/r_caster_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="blue"/>
   </visual>
   <collision>
     <origin rpy="0 0 0" xyz="0.105071 0.230415 -0.025282"/>
