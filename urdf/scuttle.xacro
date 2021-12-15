@@ -4,6 +4,7 @@
 <xacro:include filename="$(find scuttle_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find scuttle_description)/urdf/scuttle.trans" />
 <xacro:include filename="$(find scuttle_description)/urdf/scuttle.gazebo" />
+
 <link name="base_link">
   <inertial>
     <origin rpy="0 0 0" xyz="2.12433370053547e-05 -0.07877992189559235 0.07392475478815927"/>
@@ -78,7 +79,7 @@
     <geometry>
       <mesh filename="package://scuttle_description/meshes/LiDAR_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="gray"/>
   </visual>
   <collision>
     <origin rpy="0 0 0" xyz="-0.0 0.0275 -0.1096"/>
