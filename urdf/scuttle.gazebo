@@ -30,7 +30,7 @@
   <selfCollide>true</selfCollide>
 </gazebo>
 
-<gazebo reference="LiDAR_1">
+<gazebo reference="lidar">
   <material>${lidar_color}</material>
   <mu1>0.2</mu1>
   <mu2>0.2</mu2>
@@ -119,7 +119,7 @@
   </plugin>
 </gazebo>
   <!-- hokuyo -->
-  <gazebo reference="LiDAR_1">
+  <gazebo reference="lidar">
     <sensor type="gpu_ray" name="head_hokuyo_sensor">
       <pose>0 0 0.01 0 0 0</pose>
       <visualize>false</visualize>
@@ -150,7 +150,7 @@
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
         <topicName>/scan</topicName>
-        <frameName>LiDAR_1</frameName>
+        <frameName>lidar</frameName>
       </plugin>
     </sensor>
   </gazebo>
