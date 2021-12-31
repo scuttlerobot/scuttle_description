@@ -68,7 +68,7 @@
   </collision>
 </link>
 
-<link name="lidar">
+<link name="LiDAR_1">
   <inertial>
     <origin rpy="0 0 0" xyz="-0.0010241190327231165 -0.0008953477993804172 0.009594767416774092"/>
     <mass value="0.07327266108520486"/>
@@ -77,14 +77,14 @@
   <visual>
     <origin rpy="0 0 0" xyz="-0.0 0.0275 -0.1096"/>
     <geometry>
-      <mesh filename="package://scuttle_description/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://scuttle_description/meshes/LiDAR_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="gray"/>
   </visual>
   <collision>
     <origin rpy="0 0 0" xyz="-0.0 0.0275 -0.1096"/>
     <geometry>
-      <mesh filename="package://scuttle_description/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://scuttle_description/meshes/LiDAR_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -190,7 +190,7 @@
 <joint name="lidar" type="fixed">
   <origin rpy="0 0 1.570796" xyz="0.0 -0.0275 0.1096"/>
   <parent link="base_link"/>
-  <child link="lidar"/>
+  <child link="LiDAR_1"/>
   <axis xyz="0.0 0.0 1.0"/>
 </joint>
 

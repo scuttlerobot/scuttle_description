@@ -60,7 +60,7 @@ Visualization Manager:
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        lidar:
+        LiDAR_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -112,7 +112,7 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        lidar:
+        LiDAR_1:
           Value: true
         base_link:
           Value: true
@@ -139,7 +139,7 @@ Visualization Manager:
       Tree:
         odom:
           base_link:
-            lidar:
+            LiDAR_1:
               {}
             l_caster_swivel_1:
               l_caster_wheel_1:
