@@ -30,7 +30,7 @@
   <selfCollide>true</selfCollide>
 </gazebo>
 
-<gazebo reference="LiDAR_1">
+<gazebo reference="lidar_1">
   <material>${lidar_color}</material>
   <mu1>0.2</mu1>
   <mu2>0.2</mu2>
@@ -64,7 +64,6 @@
   <mu2>0.4</mu2>
   <selfCollide>true</selfCollide>
 </gazebo>
-
 
 <gazebo>
   <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
@@ -118,16 +117,16 @@
     <legacyMode>false</legacyMode>
   </plugin>
 </gazebo>
-  <!-- hokuyo -->
-  <gazebo reference="LiDAR_1">
-    <sensor type="gpu_ray" name="head_hokuyo_sensor">
-      <pose>0 0 0.01 0 0 0</pose>
+
+ <gazebo reference="lidar_1">
+    <sensor type="ray" name="rplidar_a1">
+      <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
       <update_rate>5.5</update_rate>
       <ray>
         <scan>
           <horizontal>
-            <samples></samples>
+            <samples>360</samples>
             <resolution>1</resolution>
             <min_angle>0</min_angle>
             <max_angle>6.283185307179586</max_angle>
@@ -140,13 +139,17 @@
         </range>
         <noise>
           <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
           <mean>0.0</mean>
           <stddev>0.01</stddev>
         </noise>
       </ray>
-      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
         <topicName>/scan</topicName>
-        <frameName>LiDAR_1</frameName>
+        <frameName>lidar_1</frameName>
       </plugin>
     </sensor>
   </gazebo>

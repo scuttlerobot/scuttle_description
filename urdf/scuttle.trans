@@ -23,17 +23,6 @@
   </actuator>
 </transmission>
 
-<transmission name="lidar_tran">
-  <type>transmission_interface/SimpleTransmission</type>
-  <joint name="lidar">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-  </joint>
-  <actuator name="lidar_actr">
-    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-</transmission>
-
 <transmission name="r_caster_swivel_joint_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="r_caster_swivel_joint">
