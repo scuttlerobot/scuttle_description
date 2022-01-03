@@ -188,7 +188,7 @@
 </joint>
 
 <joint name="lidar" type="fixed">
-  <origin rpy="0 0 0" xyz="0.0 -0.0275 0.1096"/>
+  <origin rpy="0 0 1.570796" xyz="0.0 -0.0275 0.1096"/>
   <parent link="base_link"/>
   <child link="lidar_1"/>
 </joint>
