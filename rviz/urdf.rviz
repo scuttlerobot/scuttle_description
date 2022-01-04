@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /Map1
       Splitter Ratio: 0.5
     Tree Height: 751
   - Class: rviz/Selection
@@ -25,7 +26,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -60,11 +61,6 @@ Visualization Manager:
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        LiDAR_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         Link Tree Style: Links in Alphabetic Order
         base_link:
           Alpha: 1
@@ -82,6 +78,11 @@ Visualization Manager:
           Show Trail: false
           Value: true
         l_wheel_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lidar_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -112,8 +113,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        LiDAR_1:
-          Value: true
         base_link:
           Value: true
         l_caster_swivel_1:
@@ -121,6 +120,10 @@ Visualization Manager:
         l_caster_wheel_1:
           Value: true
         l_wheel_1:
+          Value: true
+        lidar_1:
+          Value: true
+        map:
           Value: true
         odom:
           Value: true
@@ -137,20 +140,21 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        odom:
-          base_link:
-            LiDAR_1:
-              {}
-            l_caster_swivel_1:
-              l_caster_wheel_1:
+        map:
+          odom:
+            base_link:
+              l_caster_swivel_1:
+                l_caster_wheel_1:
+                  {}
+              l_wheel_1:
                 {}
-            l_wheel_1:
-              {}
-            r_caster_swivel_1:
-              r_caster_wheel_1:
+              lidar_1:
                 {}
-            r_wheel_1:
-              {}
+              r_caster_swivel_1:
+                r_caster_wheel_1:
+                  {}
+              r_wheel_1:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -187,7 +191,7 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: Map
-      Topic: ""
+      Topic: /map
       Unreliable: false
       Use Timestamp: false
       Value: true
@@ -219,7 +223,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.3018776178359985
+      Distance: 10
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

@@ -12,7 +12,7 @@
     <inertia ixx="0.038876" ixy="1.3e-05" ixz="1e-06" iyy="0.047513" iyz="0.000486" izz="0.084083"/>
   </inertial>
   <visual>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <origin rpy="0 0 1.570796" xyz="0 0 0"/>
     <geometry>
       <mesh filename="package://scuttle_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -174,34 +174,34 @@
 </link>
 
 <joint name="l_wheel_joint" type="continuous">
-  <origin rpy="0 0 0" xyz="0.21235 0.0 0.04175"/>
+  <origin rpy="0 0 1.570796" xyz="0.0 0.21235 0.04175"/>
   <parent link="base_link"/>
   <child link="l_wheel_1"/>
   <axis xyz="1.0 -0.0 0.0"/>
 </joint>
 
 <joint name="r_wheel_joint" type="continuous">
-  <origin rpy="0 0 0" xyz="-0.21215 0.0 0.04175"/>
+  <origin rpy="0 0 1.570796" xyz="0.0 -0.21215 0.04175"/>
   <parent link="base_link"/>
   <child link="r_wheel_1"/>
   <axis xyz="1.0 0.0 -0.0"/>
 </joint>
 
 <joint name="lidar" type="fixed">
-  <origin rpy="0 0 1.570796" xyz="0.0 -0.0275 0.1096"/>
+  <origin rpy="0 0 0" xyz="0.0275 0.0 0.1096"/>
   <parent link="base_link"/>
   <child link="lidar_1"/>
 </joint>
 
 <joint name="r_caster_swivel_joint" type="continuous">
-  <origin rpy="0 0 0" xyz="-0.119279 -0.254415 0.059282"/>
+  <origin rpy="0 0 1.570796" xyz="0.254415 0.119279 0.059282"/>
   <parent link="base_link"/>
   <child link="r_caster_swivel_1"/>
   <axis xyz="0.0 0.0 1.0"/>
 </joint>
 
 <joint name="l_caster_swivel_joint" type="continuous">
-  <origin rpy="0 0 0" xyz="0.119015 -0.254415 0.059282"/>
+  <origin rpy="0 0 1.570796" xyz="0.254415 -0.119015 0.059282"/>
   <parent link="base_link"/>
   <child link="l_caster_swivel_1"/>
   <axis xyz="0.0 -0.0 1.0"/>
