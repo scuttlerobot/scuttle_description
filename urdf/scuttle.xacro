@@ -19,7 +19,7 @@
     <material name="silver"/>
   </visual>
   <collision>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <origin rpy="0 0 1.570796" xyz="0 0 0"/>
     <geometry>
       <mesh filename="package://scuttle_description/meshes/base_link_collision_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
