@@ -94,13 +94,13 @@
     <wheelTorque>0.392</wheelTorque>
 
     <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
-    <commandTopic>${differential_drive_command_topic}</commandTopic>
+    <commandTopic>${arg differential_drive_command_topic}</commandTopic>
 
     <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
-    <odometryTopic>${differential_drive_odometry_topic}</odometryTopic>
+    <odometryTopic>${arg differential_drive_odometry_topic}</odometryTopic>
 
     <!-- Odometry frame, defaults to `odom` -->
-    <odometryFrame>${differential_drive_odometry_frame}</odometryFrame>
+    <odometryFrame>${arg differential_drive_odometry_frame}</odometryFrame>
 
     <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
     <robotBaseFrame>base_link</robotBaseFrame>
