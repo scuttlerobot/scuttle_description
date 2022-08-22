@@ -5,6 +5,10 @@
 <xacro:property name="wheel_color" value="Gazebo/Blue" />
 <xacro:property name="lidar_color" value="Gazebo/Gray" />
 
+<xacro:arg name="differential_drive_command_topic" default="cmd_vel"/>
+<xacro:arg name="differential_drive_odometry_topic" default="odom"/>
+<xacro:arg name="differential_drive_odometry_frame" default="odom"/>
+
 <gazebo>
   <plugin filename="libgazebo_ros_control.so" name="control"/>
 </gazebo>
@@ -90,13 +94,13 @@
     <wheelTorque>0.392</wheelTorque>
 
     <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
-    <commandTopic>cmd_vel</commandTopic>
+    <commandTopic>${differential_drive_command_topic}</commandTopic>
 
     <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
-    <odometryTopic>odom</odometryTopic>
+    <odometryTopic>${differential_drive_odometry_topic}</odometryTopic>
 
     <!-- Odometry frame, defaults to `odom` -->
-    <odometryFrame>odom</odometryFrame>
+    <odometryFrame>${differential_drive_odometry_frame}</odometryFrame>
 
     <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->
     <robotBaseFrame>base_link</robotBaseFrame>
