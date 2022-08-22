@@ -8,9 +8,6 @@
       An empty base link for the following reasons:
       - When running a simulation the base link is not allowed to have inertia, but the chassis does need to have
         its inertia defined. So the fix is to define a 'dummy' base link.
-
-      The bounding box for this base link is such that the origin of the coordinate system (0,0,0) is in the
-      middle of the frame, with the height such that the bottom of the wheels are at ground level.
     -->
     <link name="base_link">
     </link>
@@ -18,20 +15,28 @@
     <!--
         A box that pretends to be the ground. Used for testing that the scuttle model has been assembled correctly.
     -->
-    <!--
     <link name="ground_for_testing">
         <visual>
             <geometry>
                 <box size="0.5 0.5 0.01"/>
             </geometry>
-            <origin rpy="0 0 0" xyz="-0.25 -0.25 -0.005"/>
+            <origin rpy="0 0 0" xyz="0.25 -0.25 -0.005"/>
         </visual>
     </link>
+
+    <!-- The chassis of scuttle -->
+    <!--
+        Define the connection between base_link and chassis_link. Relative to base_link the joint
+        is exactly in the c.o.g of the chassis, because ROS considers the joint frame to be the same
+        as the child frame.
     -->
+    <joint name="chassis_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.10539999389648432 0 0.084749938964843793"/>
+        <parent link="base_link"/>
+        <child link="chassis_link"/>
+    </joint>
 
     <!--
-      The chassis of scuttle.
-
       The coordinate framework has the X-asis in the direction of forward motion, with the y-axis pointing
       to the left. This is equivalent to the coordinate system defined by the scuttle kinematics guide.
     -->
@@ -47,7 +52,7 @@
                 motors etc.). To get it to the correct location it needs to be moved slightly forward and
                 slightly up.
             -->
-            <origin rpy="0 0 0" xyz="0.10539999389648432 0 0.084749938964843793"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
                 <!--
                     The visual mesh is a high definition mesh for visual purposes only.
@@ -64,7 +69,7 @@
                 motors etc.). To get it to the correct location it needs to be moved slightly forward and
                 slightly up.
             -->
-            <origin rpy="0 0 0" xyz="0.10539999389648432 0 0.084749938964843793"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
                 <!--
                     The collision mesh is a low definition mesh for collision calculation purposes. It only
@@ -80,7 +85,14 @@
     <!--
         The left rear wheel. This includes the sprocket for the drive belt.
     -->
-    <link name="l_wheel_1">
+    <joint name="l_wheel_joint" type="continuous">
+        <origin rpy="0 0 1.570796" xyz="-0.10539999389648432 0.21235 -0.043"/>
+        <parent link="chassis_link"/>
+        <child link="l_wheel"/>
+        <axis xyz="1.0 -0.0 0.0"/>
+    </joint>
+
+    <link name="l_wheel">
         <inertial>
             <origin rpy="0 0 0" xyz="-0.020325481156161784 -9.763736334427187e-09 4.516951403188418e-09"/>
             <mass value="0.5928646271111422"/>
@@ -104,7 +116,14 @@
     <!--
         The right rear wheel. This includes the sprocket for the drive belt.
     -->
-    <link name="r_wheel_1">
+    <joint name="r_wheel_joint" type="continuous">
+        <origin rpy="0 0 1.570796" xyz="-0.10539999389648432 -0.21235 -0.043"/>
+        <parent link="chassis_link"/>
+        <child link="r_wheel"/>
+        <axis xyz="1.0 0.0 -0.0"/>
+    </joint>
+
+    <link name="r_wheel">
         <inertial>
             <origin rpy="0 0 0" xyz="0.020325563043213257 1.3954236146756306e-08 2.0353343177514915e-09"/>
             <mass value="0.592867092340216"/>
@@ -126,33 +145,16 @@
     </link>
 
     <!--
-        The LIDAR unit. This is attached to the rear extrusion on the chassis.
+        The swivel unit for the left caster
     -->
-    <link name="lidar_1">
-        <inertial>
-            <origin rpy="0 0 0" xyz="-0.0010241190327231165 -0.0008953477993804172 0.009594767416774092"/>
-            <mass value="0.07327266108520486"/>
-            <inertia ixx="2.5e-05" ixy="1e-06" ixz="0.0" iyy="2.5e-05" iyz="0.0" izz="4.4e-05"/>
-        </inertial>
-        <visual>
-            <origin rpy="0 0 0" xyz="-0.0 0.0275 -0.1096"/>
-            <geometry>
-                <mesh filename="package://scuttle_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
-            </geometry>
-            <material name="gray"/>
-        </visual>
-        <collision>
-            <origin rpy="0 0 0" xyz="-0.0 0.0275 -0.1096"/>
-            <geometry>
-                <mesh filename="package://scuttle_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
-            </geometry>
-        </collision>
-    </link>
+    <joint name="l_caster_swivel_joint" type="continuous">
+        <origin rpy="0 0 1.570796" xyz="0.149015 0.119015 -0.025468"/>
+        <parent link="chassis_link"/>
+        <child link="l_caster_swivel"/>
+        <axis xyz="0.0 0.0 1.0"/>
+    </joint>
 
-    <!--
-        The swivel unit for the right caster
-    -->
-    <link name="r_caster_swivel_1">
+    <link name="l_caster_swivel">
         <inertial>
             <origin rpy="0 0 0" xyz="-0.0002554502352885568 0.010633952722858359 -0.012968467515129908"/>
             <mass value="0.02074189648802402"/>
@@ -174,33 +176,16 @@
     </link>
 
     <!--
-        The swivel unit for the left caster
-    -->
-    <link name="l_caster_swivel_1">
-        <inertial>
-            <origin rpy="0 0 0" xyz="-0.00025520971284771765 0.010633952722903461 -0.012968467515129777"/>
-            <mass value="0.02074189648802399"/>
-            <inertia ixx="7e-06" ixy="0.0" ixz="0.0" iyy="8e-06" iyz="1e-06" izz="9e-06"/>
-        </inertial>
-        <visual>
-            <origin rpy="0 0 0" xyz="-0.119015 0.254415 -0.059282"/>
-            <geometry>
-                <mesh filename="package://scuttle_description/meshes/l_caster_swivel_1.stl" scale="0.001 0.001 0.001"/>
-            </geometry>
-            <material name="silver"/>
-        </visual>
-        <collision>
-            <origin rpy="0 0 0" xyz="-0.119015 0.254415 -0.059282"/>
-            <geometry>
-                <mesh filename="package://scuttle_description/meshes/l_caster_swivel_collision_1.stl" scale="0.001 0.001 0.001"/>
-            </geometry>
-        </collision>
-    </link>
-
-    <!--
         The wheel for the left caster
     -->
-    <link name="l_caster_wheel_1">
+    <joint name="l_caster_wheel_joint" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.017792 0.024 -0.034"/>
+        <parent link="l_caster_swivel"/>
+        <child link="l_caster_wheel"/>
+        <axis xyz="1.0 0.0 -0.0"/>
+    </joint>
+
+    <link name="l_caster_wheel">
         <inertial>
             <origin rpy="0 0 0" xyz="0.0160002016389222 -1.6368916427866864e-07 -7.02880924990934e-08"/>
             <mass value="0.03841110590847018"/>
@@ -222,9 +207,47 @@
     </link>
 
     <!--
+        The swivel unit for the right caster
+    -->
+    <joint name="r_caster_swivel_joint" type="continuous">
+        <origin rpy="0 0 1.570796" xyz="0.149015 -0.119015 -0.025468"/>
+        <parent link="chassis_link"/>
+        <child link="r_caster_swivel"/>
+        <axis xyz="0.0 -0.0 1.0"/>
+    </joint>
+
+    <link name="r_caster_swivel">
+        <inertial>
+            <origin rpy="0 0 0" xyz="-0.00025520971284771765 0.010633952722903461 -0.012968467515129777"/>
+            <mass value="0.02074189648802399"/>
+            <inertia ixx="7e-06" ixy="0.0" ixz="0.0" iyy="8e-06" iyz="1e-06" izz="9e-06"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0.119015 0.254415 -0.059282"/>
+            <geometry>
+                <mesh filename="package://scuttle_description/meshes/l_caster_swivel_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0.119015 0.254415 -0.059282"/>
+            <geometry>
+                <mesh filename="package://scuttle_description/meshes/l_caster_swivel_collision_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!--
         The wheel for the right caster
     -->
-    <link name="r_caster_wheel_1">
+    <joint name="r_caster_wheel_joint" type="continuous">
+        <origin rpy="0 0 0" xyz="0.014208 0.024 -0.034"/>
+        <parent link="r_caster_swivel"/>
+        <child link="r_caster_wheel"/>
+        <axis xyz="-1.0 -0.0 0.0"/>
+    </joint>
+
+    <link name="r_caster_wheel">
         <inertial>
             <origin rpy="0 0 0" xyz="-0.016000038883518655 -1.6368920854881175e-07 -7.028809271419911e-08"/>
             <mass value="0.03841110590847031"/>
@@ -245,52 +268,33 @@
         </collision>
     </link>
 
-    <joint name="chassis_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0.0 0 0"/>
-        <parent link="base_link"/>
-        <child link="chassis_link"/>
-    </joint>
-
-    <joint name="l_wheel_joint" type="continuous">
-        <origin rpy="0 0 1.570796" xyz="0.0 0.21235 0.04175"/>
-        <parent link="chassis_link"/>
-        <child link="l_wheel_1"/>
-        <axis xyz="1.0 -0.0 0.0"/>
-    </joint>
-
-    <joint name="r_wheel_joint" type="continuous">
-        <origin rpy="0 0 1.570796" xyz="0.0 -0.21215 0.04175"/>
-        <parent link="chassis_link"/>
-        <child link="r_wheel_1"/>
-        <axis xyz="1.0 0.0 -0.0"/>
-    </joint>
+    <!--
+        The LIDAR unit. This is attached to the rear extrusion on the chassis.
+    -->
     <joint name="lidar" type="fixed">
-        <origin rpy="0 0 3.141592" xyz="0.0275 0.0 0.1096"/>
+        <origin rpy="0 0 3.141592" xyz="-0.077900 0.0 0.024850"/>
         <parent link="chassis_link"/>
         <child link="lidar_1"/>
     </joint>
-    <joint name="r_caster_swivel_joint" type="continuous">
-        <origin rpy="0 0 1.570796" xyz="0.254415 0.119279 0.059282"/>
-        <parent link="chassis_link"/>
-        <child link="r_caster_swivel_1"/>
-        <axis xyz="0.0 0.0 1.0"/>
-    </joint>
-    <joint name="l_caster_swivel_joint" type="continuous">
-        <origin rpy="0 0 1.570796" xyz="0.254415 -0.119015 0.059282"/>
-        <parent link="chassis_link"/>
-        <child link="l_caster_swivel_1"/>
-        <axis xyz="0.0 -0.0 1.0"/>
-    </joint>
-    <joint name="r_caster_wheel_joint" type="continuous">
-        <origin rpy="0 0 0" xyz="-0.017792 0.024 -0.034"/>
-        <parent link="l_caster_swivel_1"/>
-        <child link="l_caster_wheel_1"/>
-        <axis xyz="1.0 0.0 -0.0"/>
-    </joint>
-    <joint name="l_caster_wheel_joint" type="continuous">
-        <origin rpy="0 0 0" xyz="0.014208 0.024 -0.034"/>
-        <parent link="r_caster_swivel_1"/>
-        <child link="r_caster_wheel_1"/>
-        <axis xyz="-1.0 -0.0 0.0"/>
-    </joint>
+
+    <link name="lidar_1">
+        <inertial>
+            <origin rpy="0 0 0" xyz="-0.0010241190327231165 -0.0008953477993804172 0.009594767416774092"/>
+            <mass value="0.07327266108520486"/>
+            <inertia ixx="2.5e-05" ixy="1e-06" ixz="0.0" iyy="2.5e-05" iyz="0.0" izz="4.4e-05"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0.0 0.0275 -0.1096"/>
+            <geometry>
+                <mesh filename="package://scuttle_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0.0 0.0275 -0.1096"/>
+            <geometry>
+                <mesh filename="package://scuttle_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
 </robot>
